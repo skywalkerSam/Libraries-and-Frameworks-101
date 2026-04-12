@@ -1,4 +1,4 @@
-# [Libraries and Frameworks](https://www.freecodecamp.org/learn/front-end-development-libraries-v9/)
+# [Libraries & Frameworks](https://www.freecodecamp.org/learn/front-end-development-libraries-v9/)
 
 w/ freeCodeCamp.org
 
