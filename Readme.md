@@ -9,12 +9,10 @@ w/ freeCodeCamp.org
 JavaScript libraries and frameworks provide pre-built code that **streamlines the development process**. While both libraries and frameworks serve to **improve productivity** and **standardize coding practices**, they differ in their **approach** and **level of control** they provide to developers.
 
 - **Libraries** are generally more focused on providing **solutions to specific tasks**, such as manipulating the DOM, handling events, or managing AJAX requests.
-
   - jQuery
   - React
 
 - **Frameworks**, on the other hand, provide a more **defined structure for building applications**. They often come with **a set of rules and conventions** that developers need to follow.
-
   - Next.js
   - Angular
   - Svelte
@@ -72,23 +70,24 @@ At a higher level, you can think of components like **JavaScript functions that 
 
 ### JSX
 
-This UI is described using **JSX**, *a syntax extension* for JavaScript that looks similar to HTML but allows you to **write UI elements in a more declarative way**.
+This UI is described using **JSX**, _a syntax extension_ for JavaScript that looks similar to HTML but allows you to **write UI elements in a more declarative way**.
 
-  ```jsx
-  function Greeting() {
-  const name = "John"
-  {/* The result will be Hello John*/}
-  return <h1 className="title">Hello {name}</h1>;
+```jsx
+function Greeting() {
+  const name = "John";
+  {
+    /* The result will be Hello John*/
   }
-  ```
+  return <h1 className="title">Hello {name}</h1>;
+}
+```
 
-  - We using `className` instead of `class` because in JavaScript, `class` is a **"reserved keyword"**. So, we need to use `className` *instead*.
+- We using `className` instead of `class` because in JavaScript, `class` is a **"reserved keyword"**. So, we need to use `className` _instead_.
 
-  - We are using a **Capital** letter at the *beginning* of the component name because React treats components with a capital letter as **custom components/user-defined components**, while elements with **lowercase** letters are considered **built-in HTML elements**.
+- We are using a **Capital** letter at the _beginning_ of the component name because React treats components with a capital letter as **custom components/user-defined components**, while elements with **lowercase** letters are considered **built-in HTML elements**.
+  - This subtle distinction helps React **differentiate** between native HTML tags and components that you create.
 
-    - This subtle distinction helps React **differentiate** between native HTML tags and components that you create.
-
-`Note`: When working with **JSX**, all *tags* and uses of *components* need to be explicitly **closed**. 
+`Note`: When working with **JSX**, all _tags_ and uses of _components_ need to be explicitly **closed**.
 
 ### React Fragment
 
@@ -124,13 +123,139 @@ function Greeting() {
 
 &nbsp;
 
-## import & export Components
+## Exporting & importing Components
 
+An **export** makes a component **available to import** in other files.
 
+- Default Export
 
+  A file can only have **one default export**, which makes it ideal for a file that primarily contains a _single component_.
 
+  ```jsx
+  function Cat() {
+    return (
+      <div className="card">
+        <h2>Mr. Whiskers</h2>
+        <img
+          src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/running-cats.jpg"
+          alt="Tuxedo cats running on dirt ground."
+        />
+      </div>
+    );
+  }
 
+  export default Cat;
+  ```
 
+  Or,
+
+  ```jsx
+  export default function Cat() {
+    return (
+      <div className="card">
+        <h2>Mr. Whiskers</h2>
+        <img
+          src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/running-cats.jpg"
+          alt="Tuxedo cats running on dirt ground."
+        />
+      </div>
+    );
+  }
+  ```
 
 &nbsp;
 
+- Named Export
+
+  Named exports allow a file to **share multiple components or functions**. Unlike default exports, these must be imported using the exact name they were exported with (unless you rename them using `as` term). This is useful when a file **serves as a library of components**.
+
+  ```jsx
+  // Animals.jsx
+  export function Cat() {
+    return <h2>Mr. Whiskers</h2>;
+  }
+
+  export function Dog() {
+    return <h2>Fido</h2>;
+  }
+  ```
+
+&nbsp;
+
+- Mixed Export
+  
+  A file can have **one default export** and **multiple named exports**.
+
+  ```jsx
+  // Animals.jsx
+  export default function Cat() {
+    return <h2>Mr. Whiskers</h2>;
+  }
+
+  export function Dog() {
+    return <h2>Fido</h2>;
+  }
+  ```
+
+&nbsp;
+
+### importing A Component
+
+An **import** allows a file to **use a component** that was exported elsewhere.
+
+- Default import
+
+  ```jsx
+  import Cat from "./Cat";
+
+  export default function App() {
+    return <Cat />;
+  }
+  ```
+
+&nbsp;
+
+- Named import
+
+  ```jsx
+  import { Cat, Dog } from "./Animals";
+
+  export default function App() {
+    return (
+      <div>
+        <Cat />
+        <Dog />
+      </div>
+    );
+  }
+  ```
+
+  - Renaming w/ `as` keyword
+
+    ```jsx
+    import { Cat as Kitty } from "./Animals";
+
+    export default function App() {
+      return <Kitty />;
+    }
+    ```
+
+- Mixed import
+  
+  When importing mixed exports, the **default export comes first** (*without braces*), followed by the named exports (*inside braces*):
+
+  ```jsx
+  // App.jsx
+  import Cat, { Dog } from "./Animals";
+  
+  export default function App() {
+    return (
+      <div>
+        <Cat />
+        <Dog />
+      </div>
+    );
+  }
+  ```
+
+&nbsp;
