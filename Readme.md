@@ -259,3 +259,27 @@ An **import** allows a file to **use a component** that was exported elsewhere.
   ```
 
 &nbsp;
+
+## Vite
+
+Vite is a **build tool** that aims to provide a faster development experience for modern web projects. it can be used with **React**, as well as with other libraries and frameworks like **Vue**, **Svelte**, and even with **vanilla JavaScript projects**.
+
+```shell
+npm create vite@latest my-react-app -- --template react
+```
+
+Furthermore,
+
+```shell
+cd my-react-app
+npm install
+```
+
+To run your project, run the `npm run dev` command and open up a new browser tab at `http://localhost:5173/`.
+
+&nbsp;
+
+##
+
+
+&nbsp;
