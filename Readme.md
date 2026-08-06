@@ -183,7 +183,7 @@ An **export** makes a component **available to import** in other files.
 &nbsp;
 
 - Mixed Export
-  
+
   A file can have **one default export** and **multiple named exports**.
 
   ```jsx
@@ -241,13 +241,13 @@ An **import** allows a file to **use a component** that was exported elsewhere.
     ```
 
 - Mixed import
-  
-  When importing mixed exports, the **default export comes first** (*without braces*), followed by the named exports (*inside braces*):
+
+  When importing mixed exports, the **default export comes first** (_without braces_), followed by the named exports (_inside braces_):
 
   ```jsx
   // App.jsx
   import Cat, { Dog } from "./Animals";
-  
+
   export default function App() {
     return (
       <div>
@@ -260,18 +260,18 @@ An **import** allows a file to **use a component** that was exported elsewhere.
 
 &nbsp;
 
-## Vite
+## [Vite](https://vite.dev/)
 
 Vite is a **build tool** that aims to provide a faster development experience for modern web projects. it can be used with **React**, as well as with other libraries and frameworks like **Vue**, **Svelte**, and even with **vanilla JavaScript projects**.
 
 ```shell
-npm create vite@latest my-react-app -- --template react
+npm create vite@latest
 ```
 
 Furthermore,
 
 ```shell
-cd my-react-app
+cd to-your-react-app
 npm install
 ```
 
@@ -280,6 +280,5 @@ To run your project, run the `npm run dev` command and open up a new browser tab
 &nbsp;
 
 ##
-
 
 &nbsp;
