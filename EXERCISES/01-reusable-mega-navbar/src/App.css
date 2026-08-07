@@ -15,6 +15,11 @@
 
 body {
   background-color: var(--light-grey);
+  padding: 5px 20px;
+}
+
+main {
+  min-height: 100vh;
 }
 
 .navbar {
@@ -42,7 +47,7 @@ body {
 button {
   background: transparent;
   border: none;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   padding: 10px;
   font-size: 1rem;
 }
@@ -83,4 +88,30 @@ button:hover {
 .navbar ul .nav-item:focus-within .sub-menu {
   visibility: visible;
   opacity: 1;
+}
+
+footer {
+  background: wheat;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 5px;
+  padding: 20px 40px;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer ul li {
+  margin: 30px 0;
+}
+
+footer ul li a {
+  text-decoration: none;
+  border-bottom: 2px solid skyblue;
+}
+
+footer p {
+  text-align: justify;
+  line-height: 1.7;
 }
