@@ -279,6 +279,128 @@ To run your project, run the `npm run dev` command and open up a new browser tab
 
 &nbsp;
 
-##
+## React Props
+
+Props, which is short for **properties**, is the way for **parent components** to **pass data** down to the **child component**.
+
+- Props can be of any type: _strings_, _numbers_, _booleans_, _objects_, or _arrays_.
+
+  ```jsx
+  function App() {
+    return <Greeting name="Jessica" />;
+  }
+
+  export default App;
+
+  function Greeting(props) {
+    console.log(props);
+    return <h1>Hi {props.name}!</h1>;
+  }
+  ```
+
+  - Props are passed down as **objects**.
+
+&nbsp;
+
+### Object Destructuring
+
+The code achieves the **same result** but **makes it clearer which props the component is expecting** to receive.
+
+```jsx
+function App() {
+  return <Greeting name="Jessica" />;
+}
+
+export default App;
+
+function Greeting({ name }) {
+  return <h1>Hi {name}!</h1>;
+}
+```
+
+&nbsp;
+
+### `children`: A Special Prop
+
+Any **JSX you place between a component's opening and closing tags** is passed to the component as `children`.
+
+```jsx
+function Card({ children }) {
+  return <div className="card">{children}</div>;
+}
+
+function App() {
+  return (
+    <Card>
+      <h2>Hello</h2>
+    </Card>
+  );
+}
+```
+
+- The **JSX** inside `<Card>...</Card>` becomes the `children` prop. The rendered output in the DOM will be:
+
+  ```html
+  <div class="card">
+    <h2>Hello</h2>
+  </div>
+  ```
+
+- This pattern is often used for **component composition**, where a component wraps other UI elements.
+
+&nbsp;
+
+### The Spread Syntax (`...`)
+
+Sometimes, you can have **a lot of properties** that you have to pass as props. instead of passing them one by one, you can use the spread operator (`...`), after **converting** them to an **object**.
+
+- it is used to **pass all properties of an object as individual props** to a child component.
+
+```jsx
+function App() {
+  const developerObj = {
+    name: "Alice",
+    age: 30,
+    country: "USA",
+  };
+
+  return (
+    <div className="App">
+      <DeveloperCard {...developerObj} />
+    </div>
+  );
+}
+
+function DeveloperCard({ name, age, country }) {
+  return (
+    <div className="developer-card">
+      <h1>Developer: {name}</h1>
+      <p>Age: {age}</p>
+      <p>Country: {country}</p>
+    </div>
+  );
+}
+```
+
+&nbsp;
+
+Using props in React makes your components more _flexible_ and _reusable_, allowing you to build more complex UIs.
+
+However, it's important to note that **props are immutable**, meaning they cannot be changed once passed to a component.
+
+- if you need to handle _user input_ and _modify data_, you should use **state** instead.
+
+&nbsp;
+
+## Conditional Rendering
+
+
+
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
 
 &nbsp;
