@@ -6,7 +6,7 @@ w/ freeCodeCamp.org
 
 ## Libraries vs. Frameworks
 
-JavaScript libraries and frameworks provide pre-built code that **streamlines the development process**. While both libraries and frameworks serve to **improve productivity** and **standardize coding practices**, they differ in their **approach** and **level of control** they provide to developers.
+JavaScript libraries and frameworks provide _pre-built_ code that **streamlines the development process**. While both libraries and frameworks serve to **improve productivity** and **standardize coding practices**, they differ in their **approach** and **level of control** they provide to developers.
 
 - **Libraries** are generally more focused on providing **solutions to specific tasks**, such as manipulating the DOM, handling events, or managing AJAX requests.
   - jQuery
@@ -127,7 +127,7 @@ function Greeting() {
 
 An **export** makes a component **available to import** in other files.
 
-- Default Export
+- **Default Export**
 
   A file can only have **one default export**, which makes it ideal for a file that primarily contains a _single component_.
 
@@ -165,7 +165,7 @@ An **export** makes a component **available to import** in other files.
 
 &nbsp;
 
-- Named Export
+- **Named Export**
 
   Named exports allow a file to **share multiple components or functions**. Unlike default exports, these must be imported using the exact name they were exported with (unless you rename them using `as` term). This is useful when a file **serves as a library of components**.
 
@@ -182,7 +182,7 @@ An **export** makes a component **available to import** in other files.
 
 &nbsp;
 
-- Mixed Export
+- **Mixed** Export
 
   A file can have **one default export** and **multiple named exports**.
 
@@ -203,7 +203,7 @@ An **export** makes a component **available to import** in other files.
 
 An **import** allows a file to **use a component** that was exported elsewhere.
 
-- Default import
+- **Default import**
 
   ```jsx
   import Cat from "./Cat";
@@ -215,7 +215,7 @@ An **import** allows a file to **use a component** that was exported elsewhere.
 
 &nbsp;
 
-- Named import
+- **Named import**
 
   ```jsx
   import { Cat, Dog } from "./Animals";
@@ -240,7 +240,7 @@ An **import** allows a file to **use a component** that was exported elsewhere.
     }
     ```
 
-- Mixed import
+- **Mixed** import
 
   When importing mixed exports, the **default export comes first** (_without braces_), followed by the named exports (_inside braces_):
 
@@ -609,7 +609,10 @@ function DynamicButton({ isActive }) {
 
 &nbsp;
 
-##
+## Events
+
+
+
 
 &nbsp;
 

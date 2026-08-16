@@ -2,6 +2,7 @@ import { Navbar } from "./_components/Navbar";
 import "./App.css";
 import { Footer } from "./_components/Footer";
 import { Card } from "./_components/ProfileCard";
+import { MoodBoard } from "./_components/MoodBoard";
 
 export default function App() {
   let profiles = [
@@ -27,7 +28,7 @@ export default function App() {
   return (
     <>
       <Navbar></Navbar>
-      <main>
+      <section>
         <div className="flex-container">
           {profiles.map((profile) => (
             <Card
@@ -38,7 +39,10 @@ export default function App() {
             ></Card>
           ))}
         </div>
-      </main>
+      </section>
+      <section>
+          <MoodBoard></MoodBoard>
+        </section>
       <Footer></Footer>
     </>
   );
