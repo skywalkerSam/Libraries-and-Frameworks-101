@@ -429,7 +429,7 @@ function Greeting({ isLoggedIn }) {
 
 &nbsp;
 
-## Render Lists
+## Rendering Lists
 
 Rendering lists is _a fundamental task_ in React web apps, and is used for _displaying data_ to users.
 
@@ -609,16 +609,100 @@ function DynamicButton({ isActive }) {
 
 &nbsp;
 
-## Events
+## Events in React
 
+_Event handling_ is an essential part of every interactive website.
 
+React provides a powerful and consistent way to handle _events_ through its **Synthetic Event System**, which is **a wrapper around native events** like `click`, `keydown`, and `submit`.
 
+- This _cross-browser_ wrapper ensures that events work the _same_ across all browsers, so there are _no inconsistencies_.
 
 &nbsp;
 
-&nbsp;
+in React, event handlers work in a similar way to native browser events, but with _a few tweaks_.
+
+- instead of using **lowercase event attribute names** like `onclick` and `onsubmit`, _React_ uses **camelCase**, like `onClick` and `onSubmit`.
+
+- in addition, instead of using "_strings_" **to specify the kind of event**, _React_ expects **a function for the event handler**.
+
+The _event handler function_ is passed to the _element_ as a **prop**, and the event type like `onClick` or `onSubmit` is used as **an attribute in JSX**.
+
+A click event in regular HTML:
+
+```html
+<button onclick="alert('Button clicked!')">Click Me</button>
+```
+
+in React:
+
+```jsx
+function handleClick() {
+  console.log("Button clicked!");
+}
+
+<button onClick={handleClick}>Click Me</button>;
+```
+
+- in this example, `handleClick` logs a message to the console when the user _clicks_ the `button`.
+
+- You don't need parentheses(`()`) after `handleClick` in the `onClick` attribute, as you're **passing a reference** to the _function_, **NOT calling it**.
 
 &nbsp;
+
+in React, **event handler functions** usually start with the _prefix_ `handle` to indicate they are responsible for _handling events_, like `handleClick` or `handleSubmit`.
+
+When a user action _triggers_ an event, React passes a **Synthetic Event object** to your _handler_.
+
+- This object _behaves_ much like the **native event object** in _vanilla JavaScript_, providing properties like `type`, `target`, and `currentTarget`.
+
+&nbsp;
+
+You can pass `event` as a _parameter_ to the handler function:
+
+```jsx
+function handleClick(event) {
+  console.log(event);
+}
+```
+
+&nbsp;
+
+Sometimes, while handling _special cases_ like **delete** and **edit** _features_, you might want to **pass extra data to an event handler**.
+
+You can do this by **wrapping** the _handler_ in **an inline arrow function**:
+
+```jsx
+function handleDelete(id) {
+  console.log("Deleting item:", id);
+}
+
+<button onClick={() => handleDelete(1)}>Delete Item</button>;
+```
+
+- it is **fine to use inline event handlers in React**, because React efficiently manages _re-renders_ and avoids _performance issues_ by using **a virtual DOM**.
+  - While in _vanilla JavaScript_, **inline event handlers** can lead to **performance issues** by _creating_ **new functions** on **every render**, as there is **NO virtual DOM** to _optimize_ the process.
+
+&nbsp;
+
+To **prevent default behaviors** like **browser refresh** during an `onSubmit` event, for example, you can call the `preventDefault()` method:
+
+```jsx
+function handleSubmit(event) {
+  event.preventDefault();
+  console.log("Form submitted!");
+}
+
+<form onSubmit={handleSubmit}>
+  <input type="text" />
+  <button>Submit</button>
+</form>;
+```
+
+- You can also **stop an event from bubbling up to parent** elements by calling `event.stopPropagation()`.
+
+&nbsp;
+
+## State in React
 
 &nbsp;
 
