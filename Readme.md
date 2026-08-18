@@ -702,7 +702,141 @@ function handleSubmit(event) {
 
 &nbsp;
 
-## State in React
+## States in React
+
+State is like **the brain of a component**, it holds **dynamic data** and _controls_ how the components _behave_ and look.
+
+- The _value_ from a user _input_
+
+- _Data_ fetched from an API
+
+- An item in a _to-do_ list.
+
+Whenever the _state_ **changes**, React **re-renders** the component **without reloading the page** to reflect those changes in the UI.
+
+- This _reactivity_ makes your app _interactive_.
+
+&nbsp;
+
+### `useState` Hook
+
+The `useState()` hook is **a function that lets you declare state variables** in functional components.
+
+Before _hooks_, you could only use state in _class components_. But with the introduction of hooks since React `16.8`, you can use state in functional components by using the `useState` hook.
+
+First, import:
+
+```jsx
+import { useState } from "react";
+
+// OR
+
+import React from "react";
+```
+
+Then, declare:
+
+```jsx
+const [stateVariable, setStateFunction] = useState(initialValue);
+
+// OR
+
+const [stateVariable, setStateFunction] = React.useState(initialValue);
+```
+
+- `stateVariable` **holds** the current _state_ value
+
+- `setStateFunction` (the _setter_ function) **updates** the _state_ variable
+
+- `initialValue` **sets** the _initial_ state
+
+&nbsp;
+
+The _state_ in a React component is **private**, and is **isolated to each component instance**.
+
+- This means that, if you render the same component _twice_, **the state of one component does not affect the other**.
+
+- This also means that, if you'd like to **share state between components**, then you'd need to _lift the state up_ to a **common parent** and _pass it down_ as **props**.
+
+&nbsp;
+
+Another thing is that **hooks must be called at the top level of a component**, just **before** the `return` keyword, to keep the _state_ and _effects_ consistent across renders.
+
+- This means you can **NOT** use _state_ inside _loops_, _conditions_, or _nested functions_.
+
+```jsx
+// importing the useState hook
+import { useState } from "react";
+
+function Counter() {
+  const initialValue = 0;
+
+  // The state variable and setter function
+  const [count, setCount] = useState(initialValue);
+
+  return (
+    <div>
+      {/* Display current state value */}
+      <h2>{count}</h2>
+
+      <button onClick={() => setCount(count--)}>Decrement</button>
+      <button onClick={() => setCount(count++)}>Increment</button>
+    </div>
+  );
+}
+
+export default Counter;
+```
+
+- in the code above, we have the `useState` hook _imported_ from React.
+
+- in the `Counter` component, the `count` represents the **current state** while `setCount` is the **setter function** responsible for **updating** state.
+  - The current state value is `0`.
+
+- The `return` statement contains the `count` and _two buttons_ to _decrement_ and _increment_ the `count` by `1`.
+
+&nbsp;
+
+You can **manage multiple states** by calling the `useState` hook _multiple times_.
+
+- This is especially important when you have **unrelated state variables**:
+
+```jsx
+function UserProfile() {
+  const [isOnline, setIsOnline] = useState(false);
+  const [notifications, setNotifications] = useState(0);
+
+  // The rest of the component logic
+}
+```
+
+**Form fields**: it is best to **combine the states into an object** since they're all part of the _same form_.
+
+```jsx
+function SignUpForm() {
+  const [formData, setFormData] = useState({
+    name: "",
+    username: "",
+    email: "",
+  });
+
+  // The rest of the component logic
+}
+```
+
+&nbsp;
+
+## Rendering in React
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
 
 &nbsp;
 
