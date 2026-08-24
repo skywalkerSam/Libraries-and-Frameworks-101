@@ -828,15 +828,75 @@ function SignUpForm() {
 
 ## Rendering in React
 
-&nbsp;
+in React, rendering is **the process by which components appear in the user interface** (_UI_), usually the browser.
+
+React takes all your _JavaScript_, _JSX_, and _CSS_ code, figures out how it should look, and then displays it in the _UI_.
 
 &nbsp;
 
-&nbsp;
+The 3 stages of rendering:
+
+### 1. The Trigger
+
+The trigger stage occurs when React **detects** that something has **changed**, and that the **UI might need to be updated**.
+
+- This change is often due to _an update_ in the **state** or **props**.
+  - For instance, noticing that it's time for dinner can trigger you to go into the kitchen to start cooking.
+
+```jsx
+import { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count--)}>Decrement</button>
+      <button onClick={() => setCount(count++)}>Increment</button>
+    </div>
+  );
+}
+```
+
+- Clicking the _increment_ or _decrement_ `button`, **triggers** React to show the new `count` value.
 
 &nbsp;
 
+### 2. The Render
+
+Once the _trigger_ happens, React enters _the render stage_. Here, React **re-evaluates** your components and **figures out what to display**.
+
+To do this, React uses **a lightweight copy of the "real" DOM**. This is called the **virtual DOM**.
+
+- With the _virtual DOM_, React can _quickly_ **check what needs to change in the component**.
+  - Think of this stage as the point where you're in the kitchen, you've gathered your ingredients, and you cook your dinner.
+
+For the `Counter` component, the _render stage_ is the point where React **runs the functions again with the _new_ `count` value**.
+
+- React recalculates what the `<h1>{count}</h1>` part of the component should look like based on the _updated_ `count` value, but you won't see any changes on the screen until the next stage – _commit_.
+
 &nbsp;
+
+### 3. The Commit
+
+The _commit_ stage is where React **takes the prepared changes** from the _virtual DOM_, and **applies them to the real DOM**. 
+
+in other words, this is **the stage where you see the final result** on the screen.
+
+To make this happen, React **compares the virtual DOM to the actual DOM**, **identifies only the parts that need updates**, and **applies** those _changes_ to the _real DOM_ to update the _UI_.
+
+- You can think of this stage as the point where you serve the food you cooked, making it visible just like React does when it commits updates to the actual DOM.
+
+As for the `Counter` component, the _commit_ stage is the point in which the _new_ `count` value is applied to the `h1` element, and you can **see the change** on the page.
+
+&nbsp;
+
+These three processes are _extremely fast_ because **React minimizes direct DOM manipulation by calculating changes in the virtual DOM** _first_, then it **updates only the parts that needs to be changed** in the _real DOM_.
+
+&nbsp;
+
+## Update Objects in State
 
 &nbsp;
 
