@@ -810,7 +810,11 @@ function UserProfile() {
 }
 ```
 
-**Form fields**: it is best to **combine the states into an object** since they're all part of the _same form_.
+&nbsp;
+
+### Form fields (`{}`)
+
+it is best to **combine the states into an object** since they're all part of the _same form_.
 
 ```jsx
 function SignUpForm() {
@@ -823,6 +827,79 @@ function SignUpForm() {
   // The rest of the component logic
 }
 ```
+
+&nbsp;
+
+#### Updating Objects in State
+
+Updating objects in state in React can be _tricky_, if you're used to changing object property values _directly_.
+
+React treats **state** as **immutable**, meaning you should **NOT** modify it _directly_.
+
+What **NOT** _to do_:
+
+```jsx
+const [user, setUser] = useState({
+  name: "John Doe",
+  age: 31,
+  city: "LA",
+});
+
+// Do NOT change user's properties directly!!
+const handleAgeChange = (e) => {
+  user.age = e.target.value;
+};
+```
+
+&nbsp;
+
+To _update an object_ in the state, you need to **use the setter function** to **create a new object** with the _updated value_.
+
+- **Copy the existing object** first, then **update only the property** you want to _update_.
+
+To do this, you can pass a _special function_ called **an updater function** to your _setter function_ (`setUser`).
+
+- The _updater function_ takes the **pending state as an argument**, here, called `prevUser`, and should **return the next state**.
+
+```jsx
+const [user, setUser] = useState({
+  name: "John Doe",
+  age: 31,
+  city: "LA",
+});
+
+const handleAgeChange = (e) => {
+  setUser((prevUser) => {
+    const updatedUser = { ...prevUser, age: e.target.value };
+    return updatedUser;
+  });
+};
+```
+
+- As you can see, we create a new _user object_ called `updatedUser` by using the _spread syntax_ to copy the pending user object, `...prevUser`.
+  - We then update the `age` based on the _form input_ and **return** `updatedUser` at the bottom of the function as the **next state**.
+
+- This is the ideal way to update an object in state, _especially_ when you're **NOT updating all the properties** at once.
+
+&nbsp;
+
+Now, if you are **updating the whole object**, you can **combine them into a single setter function**, like this:
+
+```jsx
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setUser((prevUser) => ({
+    ...prevUser,
+    [name]: value,
+  }));
+};
+```
+
+- Each _input field_ **must** have a `name` attribute.
+
+&nbsp;
+
+#### Updating Arrays in State
 
 &nbsp;
 
@@ -880,7 +957,7 @@ For the `Counter` component, the _render stage_ is the point where React **runs 
 
 ### 3. The Commit
 
-The _commit_ stage is where React **takes the prepared changes** from the _virtual DOM_, and **applies them to the real DOM**. 
+The _commit_ stage is where React **takes the prepared changes** from the _virtual DOM_, and **applies them to the real DOM**.
 
 in other words, this is **the stage where you see the final result** on the screen.
 
@@ -893,10 +970,6 @@ As for the `Counter` component, the _commit_ stage is the point in which the _ne
 &nbsp;
 
 These three processes are _extremely fast_ because **React minimizes direct DOM manipulation by calculating changes in the virtual DOM** _first_, then it **updates only the parts that needs to be changed** in the _real DOM_.
-
-&nbsp;
-
-## Update Objects in State
 
 &nbsp;
 
