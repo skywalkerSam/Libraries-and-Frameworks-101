@@ -830,11 +830,13 @@ function SignUpForm() {
 
 &nbsp;
 
-#### Updating Objects in State
+### Updating Objects in State
 
 Updating objects in state in React can be _tricky_, if you're used to changing object property values _directly_.
 
 React treats **state** as **immutable**, meaning you should **NOT** modify it _directly_.
+
+- in React, state is treated as _immutable_, so it can **recognize changes** and make the proper **updates** to the _UI_.
 
 What **NOT** _to do_:
 
@@ -899,7 +901,74 @@ const handleChange = (e) => {
 
 &nbsp;
 
-#### Updating Arrays in State
+### Updating Arrays in State
+
+in React, updating arrays in state is quite _straightforward_, but it can be easy to make a mistake, especially if you're coming from _vanilla JavaScript_ where you can modify arrays _directly_.
+
+Again, states in react are **immutable**, i.e., you can **NOT** change it **directly**.
+
+- Do **NOT** modify the array _directy_ using methods like `push()`, `pop()`, or `splice()`. For these methods **mutate the original array**, and React does NOT allow that.
+
+React relies on a **new array reference** to _detect changes_, so _directly_ modifying the array can **prevent the component from re-rendering** as expected.
+
+&nbsp;
+
+To update an array in state, the _key_ is to **create a new array**, do your **operations**, and **pass** that to React, rather than _mutating_ the existing array.
+
+- Because it is a **new array**, React will know that **the state has been changed**, and _trigger_ a **re-render**.
+
+```jsx
+const addItem = () => {
+  const newItem = {
+    id: items.length + 1,
+    name: `Item ${items.length + 1}`,
+  };
+
+  // Creates a new array
+  setItems((prevItems) => [...prevItems, newItem]);
+};
+```
+
+- `[...prevItems, newItem]` creates a _new array_ by **copying** all items in **the existing items array** held in _state_, then adds `newItem` at the end, which _increments_ the `id` and the item number.
+
+&nbsp;
+
+if you want to remove something from the array, you can use the `filter()` method, which **returns a new array** after _filtering_ out whatever you want to remove:
+
+```jsx
+import { useState } from "react";
+
+export function ItemsList() {
+  const [items, setItems] = useState([
+    { id: 0, name: "Item 1" },
+    { id: 1, name: "Item 2" },
+    { id: 2, name: "Item 3" },
+  ]);
+
+  const addItem = () => {
+    const newItem = { id: items.length + 1, name: `Item ${items.length + 1}` };
+    setItems((prevItems) => [...prevItems, newItem]); // Creates a new array
+  };
+
+  const removeItem = (id) => {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id)); // Creates a new array
+  };
+
+  return (
+    <div>
+      <button onClick={addItem}>Add Item</button>
+      <ul>
+        {items.map((item) => (
+          <li key={item.id}>
+            {item.name}{" "}
+            <button onClick={() => removeItem(item.id)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
 
 &nbsp;
 
@@ -970,6 +1039,20 @@ As for the `Counter` component, the _commit_ stage is the point in which the _ne
 &nbsp;
 
 These three processes are _extremely fast_ because **React minimizes direct DOM manipulation by calculating changes in the virtual DOM** _first_, then it **updates only the parts that needs to be changed** in the _real DOM_.
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
 
 &nbsp;
 
