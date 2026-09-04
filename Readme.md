@@ -1042,7 +1042,123 @@ These three processes are _extremely fast_ because **React minimizes direct DOM 
 
 &nbsp;
 
+## Reference Values (`useRef`)
+
+In React, there may be situations where you need **direct access to a DOM element**. That's where "_refs_" come in handy.
+
+In vanilla JavaScript, you used the `getElementById()` and `querySelector()` methods to access DOM elements. But in React, you use `refs` to access elements in the DOM.
+
+- One of the main differences is that, with _refs_, there is **NO need of identifiers** like _IDs_ and _classes_ to reference elements.
+
+Refs can also _store mutable values_, but _state_ is a better choice for that.
+
 &nbsp;
+
+React provides a `useRef()` hook.
+
+1. import `useRef()`
+
+   ```jsx
+   import { useRef } from "react";
+   ```
+
+2. Then, create a _variable_ that holds the _ref_ with the _initial value_ of the ref inside the `useRef` hook, say a `sectionRef` initialized to `null`:
+
+   ```jsx
+   const sectionRef = useRef(null);
+   ```
+
+3. The final thing to do is to attach the _ref_ variable to the _element_ in your JSX by using the `ref` attribute:
+
+   ```html
+   <section ref="{sectionRef}">{/* Section content */}</section>
+   ```
+
+&nbsp;
+
+Now, if you log the `ref` to the _console_, you'll see it's **an object with the current value**, in this case, `null`:
+
+```js
+console.log(sectionRef); // { current: null }
+```
+
+- You can also log the _current value_ to the console with the `current` property so you can see the _value_ directly:
+
+  ```js
+  console.log(sectionRef.current); // null
+  ```
+
+&nbsp;
+
+### The Component Lifecycle
+
+The _subsequent values_ of the `ref` depend on _the component lifecycle_.
+
+#### 1. initialization
+
+The _initial value_ of `sectionRef` will always be `null` because that's what it was _initialized_ to.
+
+#### 2. Mount
+
+After the component is _mounted_, the _value_ of the `ref` will be the `section` element the `ref` is attached to.
+
+#### 3. Unmount
+
+If the component is _unmounted_, the _ref's value_ goes back to the _initial value_ of `null`.
+
+&nbsp;
+
+A typical example to showcase a `ref` is to **focus an input element on render**, _or_ by _clicking_ a `button`.
+
+Here's how to do that when you _click a button_:
+
+```jsx
+import { useRef } from "react";
+
+export default function Focus() {
+  const inputRef = useRef(null);
+
+  const handleFocus = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
+  return (
+    <div>
+      <input ref={inputRef} type="text" placeholder="Enter text" />
+      <button onClick={handleFocus}>Focus Input</button>
+    </div>
+  );
+}
+```
+
+- In the code above, the `inputRef` is _created_ and _attached_ to the `input` element. There's also a `button` with an `onClick` event that calls a `handleFocus` function.
+  - All the `handleFocus` function does is _call_ the `focus()` method on the `input` element.
+
+&nbsp;
+
+**Best practices** for working with _refs_:
+
+- Use _refs_ mainly to interact with the DOM.
+  - You can also use them for _mutable data_, but _state_ is a better choice for that.
+    - Do NOT use `refs` for basic _state management_ – that is what `useState` is for.
+
+- Make sure to _check_ if `ref.current` _exists_, before _accessing_ its properties.
+
+  ```jsx
+  const handleFocus = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+  ```
+
+  - This **prevents errors** _in case_ the `ref` is **accessed before it is attached** to the DOM _or_ after it is removed.
+
+&nbsp;
+
+## Effects (`useEffect`)
 
 &nbsp;
 
