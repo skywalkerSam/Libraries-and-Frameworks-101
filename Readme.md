@@ -1160,6 +1160,114 @@ export default function Focus() {
 
 ## Effects (`useEffect`)
 
+In React, an _effect_ is **anything that happens outside the component rendering process**, i.e., **anything React does NOT handle directly** as part of rendering the UI.
+
+- Fetching data
+
+- Updating the browser tab's title
+
+- Reading from or writing to the browser's local storage
+
+- Getting the user's location, and much more.
+
+These operations **interact with the outside world** and are known as **side effects**.
+
+React provides the `useEffect` _hook_ to let you **handle** those **side effects**.
+
+&nbsp;
+
+`useEffect` lets you **run a _function_ after the component renders _or_ updates**.
+
+First, import
+
+```jsx
+import { useEffect } from "react";
+```
+
+Then, use
+
+```jsx
+useEffect(() => {
+  // Your side effect logic (usually a function) here
+}, [dependencies]);
+```
+
+- The _effect function_ runs after the component _renders_.
+
+- The **optional** `dependencies` argument **controls when the effect runs**.
+
+&nbsp;
+
+`dependencies` can be an _array_ of "_reactive values_" (**state**, **props**, **functions**, **variables**, and so on), an **empty** _array_, or **omitted** entirely.
+
+- if `dependencies` is an **array** that includes _one_ or more _reactive values_, the effect will **run whenever they change**.
+
+  ```jsx
+  useEffect(() => {
+    console.log("Component renders");
+  }, [someDynamicValue]);
+  ```
+
+- if `dependencies` is an **empty array**, `useEffect` **runs only once** when the _component first renders_.
+
+  ```jsx
+  useEffect(() => {
+    console.log("Component renders");
+  }, []);
+  ```
+
+- if you **omit** `dependencies`, the effect **runs every time the component renders or updates**.
+
+  ```jsx
+  useEffect(() => {
+    console.log("Component renders");
+  });
+  ```
+
+&nbsp;
+
+### The Cleanup (_optional_)
+
+if the _effect_ you set up **persists beyond the component's rendering lifecycle**, you might need another _function_ to "_clean up_" that _function_ after the component _renders_ or _updates_.
+
+For example, if your _effect_ function uses `setInterval()`, sets an _event listener_ like `window.addEventListener()`, or connects to a _server_, you'll need a _cleanup function_ to run `clearInterval()`, `window.removeEventListener()`, and disconnect from the _server_, respectively.
+
+```jsx
+useEffect(() => {
+  // Your side effect logic here
+  return () => {
+    // Cleanup logic here (optional)
+  };
+}, [dependencies]);
+```
+
+- For instance, if you add a _scroll event listener_, you can clean it up by removing it in your cleanup function:
+
+  ```jsx
+  useEffect(() => {
+    const handleScroll = () => {
+      // Handle scroll logic
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  ```
+
+&nbsp;
+
+## Custom Hooks
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
 &nbsp;
 
 &nbsp;
