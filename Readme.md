@@ -1258,11 +1258,42 @@ useEffect(() => {
 
 &nbsp;
 
-## Custom Hooks
+## [Custom Hooks](./EXERCISES/04-Debounce-Demo/src/hooks/useDebounce.js)
+
+Custom hooks are **reusable _functions_ that let you share logic across multiple components**.
+
+With a custom hook, you can **extract logic away from components**.
+
+- Data fetching
+
+- State management
+
+- Side effects
+
+- Toggling
+
+You can then _import_ the _hook_ to use in any _component_, so you can **focus on rendering and presentation** within those **components**.
+
+- Fewer _repetitions_ & less _duplication_ (**DRY**)
+  - Which means fewer places to make changes when you want to make any updates in the future.
 
 &nbsp;
 
+In React, all _built-in_ hooks start with the word `use`, so your _custom hook_ should **follow the same convention**.
+
+Your custom hook's **name should clearly communicate what it does**.
+
+So, if your custom hook…
+
+- **fetches** data, you can call it `useFetch`
+
+- **toggles** something _on_ and _off_, you can call it `useToggle`
+
+- or if it implements **debouncing**, `useDebounce` is a good name.
+
 &nbsp;
+
+##
 
 &nbsp;
 
