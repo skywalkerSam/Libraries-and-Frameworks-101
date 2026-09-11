@@ -1,3 +1,4 @@
+import { FruitsSearch } from "./_components/FruitsSearch";
 import { SearchBox } from "./_components/SearchBox";
 
 export default function App() {
@@ -5,7 +6,8 @@ export default function App() {
     <>
       <h1>Debounce Demo</h1>
       <main>
-        <SearchBox></SearchBox>
+        {/* <SearchBox></SearchBox> */}
+        <FruitsSearch></FruitsSearch>
       </main>
     </>
   );

@@ -41,3 +41,46 @@ h2 {
   font-size: large;
   color: white;
 }
+
+/* FruitsSearch Styles */
+
+/* body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+} */
+
+#search-container {
+  text-align: center;
+  background: rgb(56, 56, 56);
+  color: white;
+  padding: 45px 60px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: large;
+  border: 2px solid black;
+}
+
+#search-input {
+  padding: 10px;
+  width: 80%;
+  border: 2px solid black;
+  border-radius: 12px;
+  margin: 10px 15px;
+  background: transparent;
+  font-size: large;
+  color: white;
+}
+
+#results {
+  text-align: center;
+  max-height: 150px;
+  overflow-y: auto;
+}
+.result-item {
+  padding: 5px;
+  border-bottom: 1px solid black;
+}
