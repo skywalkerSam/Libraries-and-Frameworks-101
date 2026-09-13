@@ -16,6 +16,7 @@ body {
 
 .container h2 {
   font-size: 1.5rem;
+  color: whitesmoke;
 }
 
 .container p {
@@ -29,7 +30,9 @@ body {
   padding: 15px;
   font-size: large;
   cursor: pointer;
+  color: whitesmoke;
 }
+
 #generate-otp-button:hover {
   /* border: 3px solid black; */
   font-size: medium;
