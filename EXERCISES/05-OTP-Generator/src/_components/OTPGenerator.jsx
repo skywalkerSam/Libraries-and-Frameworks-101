@@ -30,7 +30,7 @@ export function OTPGenerator() {
       >
         {otp
           ? timerValue
-            ? `Expires in: ${timerValue} seconds`
+            ? <p>Expires in: <span id="timer-countdown">{timerValue}</span> seconds</p>
             : "OTP expired. Click the button to generate a new OTP."
           : ""}
       </p>

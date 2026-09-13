@@ -37,3 +37,7 @@ body {
   /* border: 3px solid black; */
   font-size: medium;
 }
+
+#timer-countdown {
+  color: green;
+}
