@@ -1301,15 +1301,15 @@ Forms are fundamental to every web application because they let you handle _user
 
 ### Controlled input
 
-it is the most "_React-like_" way to handle form inputs. 
+it is the most "_React-like_" way to handle form inputs.
 
-With _controlled inputs_, you **store the input field value in state**, and _update_ it through `onChange` events. 
+With _controlled inputs_, you **store the input field value in state**, and _update_ it through `onChange` events.
 
 - This gives you **complete control over the form data**, allows **instant validation**, and **conditional rendering**.
 
-The process works like this: 
+The process works like this:
 
-- React maintains the _form state _with the `useState` hook, and you update it on _every change_. 
+- React maintains the _form state \_with the `useState` hook, and you update it on \_every change_.
 
 - When a user types in an _input field_, the `onChange` event fires, updates the _state_, and React _re-renders the component_ with the _new value_.
 
@@ -1334,7 +1334,7 @@ export default function App() {
         <label htmlFor="name">Your name</label> <br />
         <input value={name} id="name" onChange={handleChange} type="text" />
         <button type="submit">Submit</button>
-      </form> 
+      </form>
     </>
   );
 }
@@ -1356,7 +1356,7 @@ The benefits of _controlled inputs_:
 
 They **maintain their own internal state** with the help of the DOM.
 
-Since the **DOM controls the input values**, what you need is to _pull in the values_ of the _input fields_ with `useRef`. 
+Since the **DOM controls the input values**, what you need is to _pull in the values_ of the _input fields_ with `useRef`.
 
 - This approach requires _less code_ and **performs better** because _refs do NOT make React re-render_.
 
@@ -1387,7 +1387,7 @@ export default function App() {
 
 ### Controlled vs. Uncontrolled inputs
 
-Use _controlled inputs_ when you need **dynamic form updates**, **_real-time_ validation**, _or_ when you want to **sync input values with state**. 
+Use _controlled inputs_ when you need **dynamic form updates**, **_real-time_ validation**, _or_ when you want to **sync input values with state**.
 
 - _Controlled inputs_ provide **better control**, but **require more _re-renders_**.
 
@@ -1406,7 +1406,165 @@ Regardless of which you use between _controlled_ and _uncontrolled inputs_, here
 
 &nbsp;
 
-## The `useActionState` Hook
+## [The `useActionState` Hook](./EXERCISES/06-use-action-state-demo/)
+
+**React 19** came with two notable _new features_:
+
+1. Server Components
+
+2. Server Actions
+
+From that version onwards, _server components_ became the default in frameworks like _Next.js_ that readily support them.
+
+&nbsp;
+
+### Server Actions
+
+**Functions that run on the server** to allow _form handling_ right on the server _without_ the need for API endpoints.
+
+```jsx
+"use server";
+
+async function submitForm(formData) {
+  const name = formData.get("name");
+  return { message: `Hello, ${name}!` };
+}
+```
+
+- This server action extracts a `name` field from a form and returns a string greeting that name.
+
+&nbsp;
+
+To simplify state management for server actions, and remove the need for _client-side_ JavaScript for simple forms, the React team introduced the `useActionState` hook in version 19.
+
+The React documentation describes the `useActionState` hook as a hook that "**allows you to update state based on the result of a form action**."
+
+But this does NOT mean that you can only use the `useActionState` hook with forms.
+
+- You can also use it to _manage_ **button clicks** and other **events**, as long as you have **an action** in place.
+
+&nbsp;
+
+`NOTE`: Since `useActionState` is a _hook_, you can **NOT use it inside a server component**.
+
+&nbsp;
+
+Basic Syntax:
+
+```jsx
+const [state, action, isPending] = useActionState(
+  actionFunction,
+  initialState,
+  permalink,
+);
+```
+
+- `state` is the **current state** the _action_ returns.
+
+- `action` is the **_function_ that triggers the server action**.
+
+- `isPending` is a _boolean_ that **indicates whether the action is currently running _or_ NOT**.
+
+- The `actionFunction` parameter is **the server action** itself.
+
+- `initialState` is the parameter that represents the **starting point for the state** before the _action_ runs.
+
+- `permalink` is an **optional string** that contains the **unique page URL** the _form modifies_.
+
+&nbsp;
+
+To use the `useActionState` hook, **make sure you have an action in place** first.
+
+```jsx
+"use server";
+
+export async function submitForm(_, formData) {
+  const name = formData.get("name");
+
+  const hour = new Date().getHours();
+  let greeting;
+
+  if (hour < 12) {
+    greeting = "Good morning";
+  } else if (hour < 18) {
+    greeting = "Good afternoon";
+  } else {
+    greeting = "Good evening";
+  }
+
+  return { message: `${greeting}, ${name}` };
+}
+```
+
+```jsx
+"use client";
+
+// Import the useActionState hook
+import { useActionState } from "react";
+
+// Import the submitForm action
+import { submitForm } from "~/actions/server-actions";
+
+
+export default const Greeter = () => {
+  // Initialize the hook
+  const [state, submit, isPending] = useActionState(submitForm, {
+    message: "",
+  });
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+      {/* Rest of the component */}
+    </div>
+  );
+};
+```
+
+&nbsp;
+
+### Fixing `isPending` w/ [`startTransition`](https://react.dev/reference/react/startTransition)
+
+**React treats data fetching and rendering as a higher priority** than the `isPending` state, which **blocks** `isPending` in the process, and throws an **error**.
+
+To fix this issue, you need to **wrap the action** in `startTransition`.
+
+```jsx
+onClick={() => startTransition(() => fetchAction())}
+```
+
+- `startTransition` is a _function_ that tells React that **a state update is of low-priority** and can be _interrupted_.
+
+**Always wrap the action** in a `startTransition()`
+
+This keeps the UI responsive while handling _asynchronous_ updates like _server actions_.
+
+&nbsp;
+
+##
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
 
 &nbsp;
 
