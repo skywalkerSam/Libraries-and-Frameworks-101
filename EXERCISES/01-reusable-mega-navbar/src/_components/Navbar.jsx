@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <nav className="navbar">
       <ul>
@@ -9,8 +13,16 @@ export function Navbar() {
           <a href="#">Widgets</a>
         </li>
         <li className="nav-item">
-          <button aria-expanded="false">Apps</button>
-          <ul className="sub-menu" aria-label="Apps">
+          <button
+            aria-expanded={isOpen ? "true" : "false"}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            Apps
+          </button>
+          <ul
+            className={isOpen ? "sub-menu sub-menu--open" : "sub-menu"}
+            aria-label="Apps"
+          >
             <li>
               <a href="#">Calendar</a>
             </li>
